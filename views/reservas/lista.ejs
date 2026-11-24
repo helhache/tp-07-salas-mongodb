@@ -1,0 +1,31 @@
+<p class="seccion"><%= seccion %></p>
+<h1>Reservas</h1>
+
+<form class="filtro" action="/reservas" method="get">
+  <label for="sala">Filtrar por sala:</label>
+  <select id="sala" name="sala">
+    <option value="">Todas las salas</option>
+    <% salas.forEach(function(sala) { %>
+      <option value="<%= sala %>" <%= salaFiltro === sala ? "selected" : "" %>><%= sala %></option>
+    <% }); %>
+  </select>
+  <button type="submit" class="boton">Filtrar</button>
+</form>
+
+<% if (reservas.length === 0) { %>
+  <p class="vacio">No hay reservas para mostrar<%= salaFiltro ? ` en ${salaFiltro}` : "" %>.</p>
+<% } else { %>
+  <div class="tarjetas">
+    <% reservas.forEach(function(reserva) { %>
+      <article class="tarjeta">
+        <h2><a href="/reservas/<%= reserva.id %>"><%= reserva.sala %> · <%= reserva.turno %></a></h2>
+        <p><%= reserva.estudiante %></p>
+        <p><%= reserva.fecha %> · <%= reserva.personas %> persona<%= reserva.personas !== 1 ? "s" : "" %></p>
+      </article>
+    <% }); %>
+  </div>
+<% } %>
+
+<div class="acciones">
+  <a href="/reservas/nueva" class="boton">Nueva reserva</a>
+</div>

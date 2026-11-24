@@ -1,0 +1,11 @@
+<h1>Reservas de salas de estudio</h1>
+<p>Reservá una sala de estudio para tu grupo. Estas son las salas disponibles:</p>
+<ul>
+  <% salas.forEach(function(sala) { %>
+    <li><%= sala %></li>
+  <% }); %>
+</ul>
+<div class="acciones">
+  <a href="/reservas" class="boton">Ver reservas</a>
+  <a href="/reservas/nueva" class="boton boton-secundario">Reservar una sala</a>
+</div>

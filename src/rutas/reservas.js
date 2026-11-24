@@ -1,0 +1,20 @@
+const { Router } = require("express");
+const {
+  prepararAreaReservas,
+  validarReserva,
+} = require("../middleware/reservas");
+
+function crearRutasReservas(controlador) {
+  const router = Router();
+
+  router.use(prepararAreaReservas);
+
+  router.get("/", controlador.listar);
+  router.get("/nueva", controlador.formulario);
+  router.get("/:id", controlador.detalle);
+  router.post("/", validarReserva, controlador.crear);
+
+  return router;
+}
+
+module.exports = { crearRutasReservas };
